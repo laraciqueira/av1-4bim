@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,12 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
           rel="stylesheet">
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -22,71 +23,92 @@
 <body>
 
 <div class="app-layout">
- <aside class="sidebar">
-<a href="#inicio" class="brand">
-<span class="brand-icon">M</span>
-<span>meu<span class="brand-light">saldo</span></span>
-</a>
 
-<p class="menu-label">MENU PRINCIPAL</p>
+ <aside class="sidebar">
+
+ <a href="#inicio" class="brand">
+  <span class="brand-icon">M</span>
+   <span>meu<span class="brand-light">saldo</span></span>        
+ </a>
+
+  <p class="menu-label">MENU</p>
 
 <nav class="sidebar-nav" aria-label="Navegação principal">
-<a href="#inicio" class="nav-link-custom active" aria-label="Início">
-<span class="nav-symbol">⌂</span>
-</a>
 
-<a href="#lancamentos" class="nav-link-custom" aria-label="Histórico de movimentações">
-<span class="nav-symbol">↕</span>
-</a>
+<a href="#inicio" class="nav-link-custom active"
+                   aria-label="Início">
+                    <span class="nav-symbol">⌂</span>
+                </a>
 
-<a href="#novo-lancamento" class="nav-link-custom" aria-label="Adicionar lançamento">
-<span class="nav-symbol">＋</span>
-                    
- </a>
-</nav>
+                <a href="#lancamentos" class="nav-link-custom"
+                   aria-label="Histórico de movimentações">
+                    <span class="nav-symbol">↕</span>
+                </a>
 
-<div class="sidebar-bottom">
-<div class="sidebar-note">
-<span class="note-icon"> </span>
-<p>Pequenos hábitos constroem grandes resultados.</p>
- </div>
-<span class="sidebar-version">MEUS CONTROLES · V. 1.0</span>
-</div>
-</aside>
+                <a href="#novo-lancamento" class="nav-link-custom"
+                   aria-label="Adicionar lançamento">
+                    <span class="nav-symbol">＋</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <div class="sidebar-note">
+                    <span class="note-icon"></span>
+                    <p>Cuide bem do seu dinheiro.</p>
+                </div>
+
+                <span class="sidebar-version">MEUS CONTROLES · V. 1.0</span>
+
+            </div>
+
+        </aside>
 
         <main class="main-content" id="inicio">
 
-<header class="topbar">
- <div>
-<p class="eyebrow">SEU ESPAÇO FINANCEIRO</p>
- <h1>Visão geral</h1>
-<p class="page-subtitle"> Organize seu dinheiro, acompanhe seus passos.
-</p>
- </div>
+            <header class="topbar">
 
-<a href="#novo-lancamento" class="btn btn-primary-custom">
-<span aria-hidden="true">＋</span>
+                <div>
+                    <p class="eyebrow">CONTROLE FINANCEIRO</p>
+                    <h1>Visão geral</h1>
+                    <p class="page-subtitle">
+                        Acompanhe suas receitas e despesas.
+                    </p>
+                </div>
+
+                <a href="#novo-lancamento" class="btn btn-primary-custom">
+                    <span aria-hidden="true">＋</span>
                     Novo lançamento
                 </a>
+
             </header>
 
             <!-- Resumo financeiro -->
+
             <section class="summary-section" aria-labelledby="summary-title">
+
                 <div class="section-heading">
+
                     <div>
-                        <p class="eyebrow">ACOMPANHAMENTO</p>
-                        <h2 id="summary-title">Seu resumo financeiro</h2>
+                        <p class="eyebrow">RESUMO</p>
+                        <h2 id="summary-title">Resumo financeiro</h2>
                     </div>
+
                     <span class="period-tag">Visão geral</span>
+
                 </div>
 
                 <div class="row g-3 summary-grid">
 
                     <div class="col-12 col-md-4">
+
                         <article class="summary-card balance-card">
+
                             <div class="card-topline">
                                 <span>Saldo atual</span>
-                                <span class="card-icon balance-icon" aria-hidden="true">R$</span>
+                                <span class="card-icon balance-icon"
+                                      aria-hidden="true">R$</span>
                             </div>
 
                             <p class="summary-value" id="saldo-atual">
@@ -96,65 +118,87 @@
                             <p class="card-caption">
                                 Receitas menos despesas
                             </p>
+
                         </article>
+
                     </div>
 
                     <div class="col-12 col-md-4">
+
                         <article class="summary-card">
+
                             <div class="card-topline">
                                 <span>Total de receitas</span>
-                                <span class="card-icon income-icon" aria-hidden="true">↗</span>
+                                <span class="card-icon income-icon"
+                                      aria-hidden="true">↗</span>
                             </div>
 
-                            <p class="summary-value income-value" id="total-receitas">
+                            <p class="summary-value income-value"
+                               id="total-receitas">
                                 R$ 0,00
                             </p>
 
                             <p class="card-caption">
-                                Dinheiro que entrou
+                                Total recebido
                             </p>
+
                         </article>
+
                     </div>
 
                     <div class="col-12 col-md-4">
+
                         <article class="summary-card">
+
                             <div class="card-topline">
                                 <span>Total de despesas</span>
-                                <span class="card-icon expense-icon" aria-hidden="true">↘</span>
+                                <span class="card-icon expense-icon"
+                                      aria-hidden="true">↘</span>
                             </div>
 
-                            <p class="summary-value expense-value" id="total-despesas">
+                            <p class="summary-value expense-value"
+                               id="total-despesas">
                                 R$ 0,00
                             </p>
 
                             <p class="card-caption">
-                                Dinheiro que saiu
+                                Total gasto
                             </p>
+
                         </article>
+
                     </div>
 
                 </div>
+
             </section>
 
-            <!-- Formulário de cadastro -->
+            <!-- Cadastro de lançamentos -->
+
             <section class="content-section" id="novo-lancamento"
                      aria-labelledby="form-title">
 
                 <div class="section-heading">
+
                     <div>
-                        <p class="eyebrow">MOVIMENTE SEU SALDO</p>
-                        <h2 id="form-title">Adicionar lançamento</h2>
+                        <p class="eyebrow">MOVIMENTAÇÕES</p>
+                        <h2 id="form-title">Novo lançamento</h2>
                     </div>
+
                 </div>
 
                 <div class="content-card">
+
                     <form id="form-lancamento">
+
                         <div class="row g-3">
 
                             <div class="col-12 col-md-6">
+
                                 <label for="descricao" class="form-label">
                                     Descrição
                                 </label>
+
                                 <input
                                     type="text"
                                     class="form-control"
@@ -162,12 +206,15 @@
                                     placeholder="Ex.: Salário, mercado, internet"
                                     maxlength="80"
                                     required>
+
                             </div>
 
                             <div class="col-12 col-md-6">
+
                                 <label for="valor" class="form-label">
                                     Valor (R$)
                                 </label>
+
                                 <input
                                     type="number"
                                     class="form-control"
@@ -177,22 +224,28 @@
                                     max="999999999"
                                     step="0.01"
                                     required>
+
                             </div>
 
                             <div class="col-12 col-md-4">
+
                                 <label for="tipo" class="form-label">
                                     Tipo de movimentação
                                 </label>
+
                                 <select class="form-select" id="tipo" required>
                                     <option value="receita">Receita</option>
                                     <option value="despesa">Despesa</option>
                                 </select>
+
                             </div>
 
                             <div class="col-12 col-md-4">
+
                                 <label for="categoria" class="form-label">
                                     Categoria
                                 </label>
+
                                 <select class="form-select" id="categoria" required>
                                     <option value="Salário">Salário</option>
                                     <option value="Alimentação">Alimentação</option>
@@ -203,54 +256,70 @@
                                     <option value="Educação">Educação</option>
                                     <option value="Outros">Outros</option>
                                 </select>
+
                             </div>
 
                             <div class="col-12 col-md-4">
+
                                 <label for="data" class="form-label">
                                     Data
                                 </label>
+
                                 <input
                                     type="date"
                                     class="form-control"
                                     id="data"
                                     required>
+
                             </div>
 
                             <div class="col-12 d-flex justify-content-end">
+
                                 <button type="submit" class="btn btn-primary-custom">
                                     <span aria-hidden="true">＋</span>
                                     Adicionar lançamento
                                 </button>
+
                             </div>
 
                         </div>
+
                     </form>
+
                 </div>
+
             </section>
 
-            <!-- Histórico de movimentações -->
+            <!-- Histórico -->
+
             <section class="content-section" id="lancamentos"
                      aria-labelledby="transactions-title">
 
                 <div class="section-heading transactions-heading">
+
                     <div>
-                        <p class="eyebrow">HISTÓRICO</p>
-                        <h2 id="transactions-title">Últimas movimentações</h2>
+                        <p class="eyebrow">MOVIMENTAÇÕES</p>
+                        <h2 id="transactions-title">Histórico</h2>
                     </div>
 
                     <label for="filtro-tipo" class="visually-hidden">
                         Filtrar movimentações
                     </label>
+
                     <select class="form-select filter-select" id="filtro-tipo">
                         <option value="todos">Todas</option>
                         <option value="receita">Receitas</option>
                         <option value="despesa">Despesas</option>
                     </select>
+
                 </div>
 
                 <div class="content-card table-card">
+
                     <div class="table-responsive">
+
                         <table class="table align-middle transaction-table">
+
                             <thead>
                                 <tr>
                                     <th scope="col">Descrição</th>
@@ -264,30 +333,40 @@
                             </thead>
 
                             <tbody id="lista-lancamentos">
-                                <!-- O JavaScript insere os lançamentos aqui. -->
+                                <!-- Os lançamentos são exibidos aqui. -->
                             </tbody>
+
                         </table>
+
                     </div>
 
                     <p id="mensagem-vazia" class="empty-state">
-                        Nenhum lançamento por aqui ainda.
-                        Adicione sua primeira movimentação acima.
+                        Nenhum lançamento cadastrado.
+                        Adicione uma receita ou despesa para começar.
                     </p>
+
                 </div>
+
             </section>
 
             <footer class="page-footer">
+
                 <p>MeuSaldo <span>·</span> Controle financeiro pessoal</p>
-                <p>Organização começa com um passo.</p>
+                <p>Tenha mais controle sobre seu dinheiro.</p>
+
             </footer>
 
         </main>
+
     </div>
 
     <div class="toast-message" id="mensagem-status"
          role="status" aria-live="polite"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="script.js"></script>
+
 </body>
 </html>
+

@@ -1,9 +1,8 @@
 
 "use strict";
 
-
-
 const form = document.getElementById("form-lancamento");
+
 const campoDescricao = document.getElementById("descricao");
 const campoValor = document.getElementById("valor");
 const campoTipo = document.getElementById("tipo");
@@ -21,9 +20,9 @@ const mensagemStatus = document.getElementById("mensagem-status");
 
 const CHAVE_STORAGE = "meusaldo_lancamentos";
 
-
 function obterDataAtual() {
     const hoje = new Date();
+
     const ano = hoje.getFullYear();
     const mes = String(hoje.getMonth() + 1).padStart(2, "0");
     const dia = String(hoje.getDate()).padStart(2, "0");
@@ -38,12 +37,10 @@ function formatarMoeda(valor) {
     });
 }
 
-
 function formatarData(data) {
     const [ano, mes, dia] = data.split("-");
     return `${dia}/${mes}/${ano}`;
 }
-
 
 function carregarLancamentos() {
     try {
@@ -53,13 +50,13 @@ function carregarLancamentos() {
             return [];
         }
 
-        const lancamentos = JSON.parse(dados);
+        const itens = JSON.parse(dados);
 
-        if (!Array.isArray(lancamentos)) {
+        if (!Array.isArray(itens)) {
             return [];
         }
 
-        return lancamentos.filter((item) =>
+        return itens.filter((item) =>
             item &&
             Number.isSafeInteger(item.id) &&
             typeof item.descricao === "string" &&
@@ -69,10 +66,13 @@ function carregarLancamentos() {
             item.valor > 0 &&
             ["receita", "despesa"].includes(item.tipo) &&
             typeof item.categoria === "string" &&
+            item.categoria.trim() !== "" &&
+            typeof item.data === "string" &&
             /^\d{4}-\d{2}-\d{2}$/.test(item.data)
         );
+
     } catch (erro) {
-        console.error("Não foi possível carregar os lançamentos:", erro);
+        console.error("Erro ao carregar os lançamentos:", erro);
         return [];
     }
 }
@@ -81,11 +81,20 @@ let lancamentos = carregarLancamentos();
 
 function salvarLancamentos() {
     try {
-        localStorage.setItem(CHAVE_STORAGE, JSON.stringify(lancamentos));
+        localStorage.setItem(
+            CHAVE_STORAGE,
+            JSON.stringify(lancamentos)
+        );
+
         return true;
+
     } catch (erro) {
-        console.error("Não foi possível salvar os dados:", erro);
-        mostrarMensagem("Não foi possível salvar. Verifique o armazenamento do navegador.");
+        console.error("Erro ao salvar os dados:", erro);
+
+        mostrarMensagem(
+            "Não foi possível salvar os dados no navegador."
+        );
+
         return false;
     }
 }
@@ -121,8 +130,9 @@ function atualizarResumo() {
     totalReceitas.textContent = formatarMoeda(receitas);
     totalDespesas.textContent = formatarMoeda(despesas);
 
-
-    saldoAtual.style.color = saldo < 0 ? "#ffcbc5" : "#ffffff";
+    saldoAtual.style.color = saldo < 0
+        ? "#ffcbc5"
+        : "#ffffff";
 }
 
 function criarElemento(tag, classe, texto) {
@@ -159,6 +169,7 @@ function criarLinha(item) {
     );
 
     const sinal = item.tipo === "receita" ? "+" : "−";
+
     const classeValor = item.tipo === "receita"
         ? "amount-income"
         : "amount-expense";
@@ -172,14 +183,20 @@ function criarLinha(item) {
     const celulaAcao = document.createElement("td");
     celulaAcao.className = "text-end";
 
-    const botaoExcluir = criarElemento("button", "delete-button", "×");
+    const botaoExcluir = criarElemento(
+        "button",
+        "delete-button",
+        "×"
+    );
 
     botaoExcluir.type = "button";
     botaoExcluir.dataset.id = String(item.id);
+
     botaoExcluir.setAttribute(
         "aria-label",
         `Excluir lançamento: ${item.descricao}`
     );
+
     botaoExcluir.title = "Excluir lançamento";
 
     celulaAcao.appendChild(botaoExcluir);
@@ -195,19 +212,17 @@ function criarLinha(item) {
     return linha;
 }
 
-
 function renderizarLancamentos() {
     const tipoSelecionado = filtroTipo.value;
 
     const lancamentosFiltrados = lancamentos
-        .filter((item) => {
-            return tipoSelecionado === "todos" ||
-                item.tipo === tipoSelecionado;
-        })
-        .sort((a, b) => {
-       
-            return b.data.localeCompare(a.data) || b.id - a.id;
-        });
+        .filter((item) =>
+            tipoSelecionado === "todos" ||
+            item.tipo === tipoSelecionado
+        )
+        .sort((a, b) =>
+            b.data.localeCompare(a.data) || b.id - a.id
+        );
 
     listaLancamentos.replaceChildren();
 
@@ -219,7 +234,7 @@ function renderizarLancamentos() {
 
     if (lancamentosFiltrados.length === 0) {
         mensagemVazia.textContent = lancamentos.length === 0
-            ? "Nenhum lançamento por aqui ainda. Adicione sua primeira movimentação acima."
+            ? "Nenhum lançamento cadastrado. Adicione uma receita ou despesa para começar."
             : "Nenhum lançamento encontrado para este filtro.";
     }
 }
@@ -242,6 +257,7 @@ form.addEventListener("submit", (evento) => {
         !["receita", "despesa"].includes(tipo) ||
         !categoria ||
         !data ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(data) ||
         data > obterDataAtual()
     ) {
         mostrarMensagem("Confira os dados e tente novamente.");
@@ -268,6 +284,7 @@ form.addEventListener("submit", (evento) => {
     renderizarLancamentos();
 
     form.reset();
+
     campoData.value = obterDataAtual();
     campoDescricao.focus();
 
@@ -283,17 +300,19 @@ listaLancamentos.addEventListener("click", (evento) => {
 
     const id = Number(botao.dataset.id);
 
-    const lancamentoEncontrado = lancamentos.find(
+    const encontrado = lancamentos.find(
         (item) => item.id === id
     );
 
-    if (!lancamentoEncontrado) {
+    if (!encontrado) {
         return;
     }
 
     const listaAnterior = lancamentos;
 
-    lancamentos = lancamentos.filter((item) => item.id !== id);
+    lancamentos = lancamentos.filter(
+        (item) => item.id !== id
+    );
 
     if (!salvarLancamentos()) {
         lancamentos = listaAnterior;
@@ -322,3 +341,4 @@ campoData.value = obterDataAtual();
 
 atualizarResumo();
 renderizarLancamentos();
+
